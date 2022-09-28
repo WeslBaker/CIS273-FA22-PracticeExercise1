@@ -17,6 +17,8 @@ namespace PracticeExercise1
         /// </summary>
         public int? First
         {
+            get => IsEmpty ? null : array[0];
+            //Below equal to ternary operator above
             //get
             //{
             //    if (IsEmpty)
@@ -29,18 +31,31 @@ namespace PracticeExercise1
             //    }
             //}
 
-            get => IsEmpty ? null : array[0];
         }
 
-        // TODO
         /// <summary>
         /// Returns last element in list, null if empty.
         /// </summary>
-        public int? Last { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int? Last
+        {
+            get => IsEmpty ? null : array[Length - 1];
+            //Below equal to ternary operator above
+            //get
+            //{
+            //    if (IsEmpty)
+            //    {
+            //        return null;
+            //    }
+            //    else
+            //    {
+            //        return array[Length - 1];
+            //    }
+            //
+         }
 
-        /// <summary>
-        /// Returns true if list is has no elements; false otherwise.
-        /// </summary>
+            /// <summary>
+            /// Returns true if list is has no elements; false otherwise.
+            /// </summary>
         public bool IsEmpty { get => Length == 0; }
 
         /// <summary>
@@ -48,7 +63,6 @@ namespace PracticeExercise1
         /// </summary>
         public int Length { get => length; }
 
-        // TODO fix capacity bug
         /// <summary>
         /// Adds given value to end of list.
         /// </summary>
@@ -82,7 +96,6 @@ namespace PracticeExercise1
             return false;
         }
 
-        // TODO
         /// <summary>
         /// Find index of first element with matching value.
         /// </summary>
@@ -90,10 +103,16 @@ namespace PracticeExercise1
         /// <returns>Index of first element with value; -1 if element is not found</returns>
         public int FirstIndexOf(int value)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < Length; i++)
+            {
+                if(array[i] == value)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
-        // TODO
         /// <summary>
         /// Insert new value after first instance of existing value.
         /// If existingValue is not in list, then add new value to end of list.
@@ -102,10 +121,18 @@ namespace PracticeExercise1
         /// <param name="existingValue"></param>
         public void InsertAfter(int newValue, int existingValue)
         {
-            throw new NotImplementedException();
+            if(Contains(existingValue))
+            {
+                ShiftRight(FirstIndexOf(existingValue));
+                array[FirstIndexOf(existingValue) - 1] = newValue;
+                length++;
+            }
+            else
+            {
+                Append(newValue);
+            }
         }
 
-        // TODO
         /// <summary>
         /// Insert value at given index 
         /// </summary>
@@ -113,7 +140,16 @@ namespace PracticeExercise1
         /// <param name="index"></param>
         public void InsertAt(int value, int index)
         {
-            throw new NotImplementedException();
+            if(index < Length)
+            {
+                ShiftRight(index);
+                array[index] = value;
+                length++;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -152,25 +188,38 @@ namespace PracticeExercise1
         }
 
 
-        // TODO
         /// <summary>
         /// Remove first item with given value
         /// </summary>
         /// <param name="value">value of item to be removed</param>
         public void Remove(int value)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < Length; i++)
+            {
+                if (array[i] == value)
+                {
+                    ShiftLeft(i);
+                    length--;
+                    break;
+                }
+            }
         }
 
-        // TODO
         /// <summary>
         /// Remove item at specififed index.
         /// </summary>
         /// <param name="index"></param>
         public void RemoveAt(int index)
         {
-            ShiftLeft(index);
-            length--;
+            if(index < Length)
+            {
+                ShiftLeft(index);
+                length--;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public override string ToString()

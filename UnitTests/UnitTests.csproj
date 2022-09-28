@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="C:\Users\Wesley Baker\Source\Repos\CIS273-FA22-PracticeExercise1\PracticeExercise1.csproj" />
-    <ProjectReference Include="C:\Users\Wesley Baker\Source\Repos\CIS273-FA22-PracticeExercise1\PracticeExercise1.csproj" />
+    <ProjectReference Include="..\PracticeExercise1\PracticeExercise1.csproj" />
+    <ProjectReference Include="..\PracticeExercise1\PracticeExercise1.csproj" />
   </ItemGroup>
 </Project>
